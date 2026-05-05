@@ -134,12 +134,6 @@
     .nav-links a:hover::after { transform:scaleX(1); }
     .nav-links .active { color:var(--gold); }
     .nav-links .active::after { transform:scaleX(1); }
-    .nav-cta {
-      font-size:.63rem; letter-spacing:.22em; text-transform:uppercase;
-      color:var(--dark); background:var(--gold); padding:10px 24px;
-      transition:background .3s;
-    }
-    .nav-cta:hover { background:var(--gold-light); }
     .hamburger { display:none; background:none; border:none; cursor:none; color:var(--cream); }
 
     /* MOBILE NAV */
@@ -281,7 +275,6 @@
     .magnetic:hover { background:var(--gold-light); }
 
     @media (max-width:1180px) {
-      .nav-cta { display:none; }
       .nav-links { gap:22px; }
     }
     @media (max-width:900px) {
@@ -306,7 +299,7 @@
       .masonry { columns:2; column-gap:8px; }
       .masonry .g-item { margin-bottom:8px; }
       #navbar { padding:12px 20px; min-height:72px; gap:12px; }
-      .nav-links,.nav-cta { display:none; }
+      .nav-links { display:none; }
       .hamburger { display:flex; align-items:center; justify-content:center; min-width:44px; min-height:44px; }
       .nav-brand { min-width:0; gap:10px; }
       .nav-monogram { height:36px; flex-shrink:0; }
@@ -414,8 +407,6 @@
       <li><a href="index.html#opinie">Opinie</a></li>
       <li><a href="index.html#kontakt">Kontakt</a></li>
     </ul>
-    <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz"
-       class="nav-cta magnetic" target="_blank" rel="noopener">Zarezerwuj</a>
     <button class="hamburger" id="ham" aria-label="Menu">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
         <line x1="3" y1="7" x2="21" y2="7"/>
