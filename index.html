@@ -633,70 +633,83 @@
     }
 
     @media (max-width: 768px) {
-      /* Layout */
+      html, body { width: 100%; overflow-x: hidden; }
       section { padding: 64px 20px; }
       #hero { padding: 0; min-height: 100svh; }
-      #o-nas { padding: 64px 20px; }
-      #uslugi { padding: 64px 20px; }
-      #galeria-prev { padding: 64px 20px; }
+      #o-nas, #uslugi, #galeria-prev, #opinie, #kontakt { padding: 64px 20px; }
       #rezerwacja { padding: 80px 20px; min-height: 60vh; }
-      #opinie { padding: 64px 20px; }
-      #kontakt { padding: 64px 20px; }
 
-      /* Hero */
-      .hero-content { padding: 0 20px 72px; }
-      h1 { font-size: clamp(2.8rem, 11vw, 5rem); margin-bottom: 16px; }
-      .hero-loc { font-size: 0.9rem; }
+      .hero-img { object-position: 58% center; }
+      .hero-overlay {
+        background:
+          linear-gradient(to bottom, rgba(13,11,7,.82) 0%, rgba(13,11,7,.32) 38%, rgba(13,11,7,.08) 58%),
+          linear-gradient(to top, rgba(13,11,7,1) 0%, rgba(13,11,7,.88) 30%, rgba(13,11,7,.36) 70%, transparent 100%);
+      }
+      .hero-content { padding: 0 20px max(84px, env(safe-area-inset-bottom)); max-width: 100%; }
+      h1 { font-size: clamp(3rem, 17vw, 5rem); line-height: .9; margin-bottom: 16px; max-width: 9ch; }
+      .hero-loc { font-size: 0.95rem; line-height: 1.45; max-width: 18rem; }
       .scroll-ind { right: 20px; bottom: 24px; }
+      .eyebrow {
+        display: flex; flex-wrap: wrap; gap: 6px 10px;
+        max-width: 18rem; line-height: 1.65; letter-spacing: 0.24em;
+      }
 
-      /* Nav */
-      #navbar { padding: 14px 20px; }
+      #navbar { padding: 12px 20px; min-height: 72px; gap: 12px; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+      .nav-brand { min-width: 0; gap: 10px; }
+      .nav-monogram { height: 36px; flex-shrink: 0; }
+      .nav-brand-text {
+        font-size: 0.86rem; letter-spacing: 0.14em;
+        max-width: calc(100vw - 112px);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .nav-brand-sub { font-size: 0.58rem; letter-spacing: 0.06em; }
 
-      /* Mobile nav */
-      #mob-nav a { font-size: 2rem; min-height: 52px; display: flex; align-items: center; }
+      #mob-nav { padding: 92px 24px 40px; gap: 22px; }
+      #mob-nav a { font-size: clamp(1.8rem, 9vw, 2.4rem); min-height: 50px; display: flex; align-items: center; text-align: center; }
 
-      /* About */
       .about-img img { height: 360px; object-position: top; }
-      .about-txt p { font-size: 0.85rem; margin-bottom: 20px; }
-      .stats { gap: 20px; flex-wrap: wrap; }
+      .about-txt p { font-size: 0.9rem; line-height: 1.85; margin-bottom: 20px; }
+      .stats { gap: 18px; flex-wrap: wrap; justify-content: space-between; }
       .stat-n { font-size: 2.4rem; }
+      .stat-l { letter-spacing: 0.14em; }
 
-      /* Services */
-      .srv-grid { grid-template-columns: 1fr; gap: 2px; }
-      .srv-card { padding: 32px 24px; }
+      .srv-grid { grid-template-columns: 1fr; gap: 10px; }
+      .srv-card { padding: 30px 22px; border: 1px solid rgba(201,168,76,.12); }
+      .srv-name { font-size: 1.42rem; }
+      .srv-price small { display: block; margin-top: 2px; line-height: 1.4; }
 
-      /* Gallery */
       .gal-head { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 32px; }
       .gal-grid { columns: 2; column-gap: 8px; }
       .gal-grid img { margin-bottom: 8px; }
 
-      /* CTA */
       .cta-body h2 { font-size: clamp(2.4rem, 10vw, 5rem); margin-bottom: 36px; }
-      .magnetic { padding: 16px 36px; min-height: 52px; display: inline-flex; align-items: center; justify-content: center; }
+      .magnetic {
+        width: min(100%, 340px); padding: 16px 24px; min-height: 52px;
+        display: inline-flex; align-items: center; justify-content: center;
+        text-align: center; line-height: 1.45; white-space: normal;
+      }
 
-      /* Reviews */
-      .rev-grid { grid-template-columns: 1fr; gap: 2px; }
+      .rev-grid { grid-template-columns: 1fr; gap: 10px; }
       .rev-card { padding: 28px 20px; }
 
-      /* Contact */
       .c-items { gap: 24px; }
+      .c-item { min-width: 0; }
+      .c-text { min-width: 0; overflow-wrap: anywhere; }
       .map-box { height: 300px; }
       .hours td { font-size: 0.78rem; }
 
-      /* Footer */
       footer { flex-direction: column; gap: 18px; text-align: center; padding: 36px 20px; }
       .foot-brand { justify-content: center; }
+      .foot-copy { max-width: 28rem; line-height: 1.7; }
 
-      /* Intro */
       .intro-monogram { width: 90px; }
       .intro-name { font-size: clamp(1.4rem, 7vw, 2.8rem); letter-spacing: 0.25em; }
       .intro-tagline { font-size: 0.8rem; }
       .intro-enter { font-size: 0.6rem; letter-spacing: 0.22em; margin-top: 28px; }
 
-      /* Sections headings */
-      h2 { font-size: clamp(2.2rem, 8vw, 3.5rem); margin-bottom: 20px; }
+      h2 { font-size: clamp(2.2rem, 8vw, 3.5rem); line-height: .98; margin-bottom: 20px; }
     }
 
     @media (max-width: 480px) {
@@ -704,17 +717,18 @@
       section { padding: 52px 16px; }
       #o-nas, #uslugi, #galeria-prev, #opinie, #kontakt { padding: 52px 16px; }
       #rezerwacja { padding: 64px 16px; }
-      #navbar { padding: 12px 16px; }
+      #navbar { padding: 10px 16px; min-height: 66px; }
       footer { padding: 32px 16px; }
 
-      h1 { font-size: clamp(2.4rem, 12vw, 3.6rem); }
-      h2 { font-size: clamp(2rem, 9vw, 3rem); }
+      h1 { font-size: clamp(3rem, 20vw, 4.2rem); max-width: 8ch; }
+      h2 { font-size: clamp(2.15rem, 12vw, 3.2rem); line-height: .98; }
 
       .gal-grid { columns: 1; }
-      .stats { gap: 16px; }
+      .stats { gap: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .stat-n { font-size: 2rem; }
+      .stat-l { font-size: 0.52rem; letter-spacing: 0.1em; }
 
-      .hero-content { padding: 0 16px 64px; }
+      .hero-content { padding: 0 16px max(76px, env(safe-area-inset-bottom)); }
       .about-img img { height: 300px; }
 
       .intro-monogram { width: 76px; }
@@ -723,8 +737,12 @@
       .srv-card { padding: 28px 20px; }
       .rev-card { padding: 24px 16px; }
 
-      .eyebrow { font-size: 0.55rem; letter-spacing: 0.3em; }
-      .s-eye { font-size: 0.55rem; letter-spacing: 0.3em; }
+      .eyebrow { font-size: 0.55rem; letter-spacing: 0.18em; max-width: 15rem; }
+      .s-eye { font-size: 0.55rem; letter-spacing: 0.24em; line-height: 1.6; }
+      .nav-brand-text { font-size: 0.78rem; max-width: calc(100vw - 104px); }
+      .nav-brand-sub { display: none; }
+      .nav-monogram { height: 34px; }
+      .hamburger { min-width: 42px; }
 
       .map-box { height: 260px; }
     }
@@ -822,7 +840,7 @@
          onerror="this.src='https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80'">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <span class="eyebrow reveal">Salon Fryzjerski &nbsp;·&nbsp; Łódź &nbsp;·&nbsp; Gdańska 57A</span>
+      <span class="eyebrow reveal">Salon Fryzjerski · Łódź · Gdańska 57A</span>
       <h1 class="reveal">Sztuka<br><em>Włosa</em><span class="sr-only"> — salon fryzjerski Łódź</span></h1>
       <p class="hero-loc reveal">Monika Szafrańska · salon fryzjerski Łódź</p>
     </div>
