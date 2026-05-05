@@ -592,6 +592,24 @@
     }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 1180px) {
+      .nav-cta { display: none; }
+      .nav-links { gap: 24px; }
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+      #navbar { gap: 14px; }
+      .nav-brand { min-width: 0; }
+      .nav-brand-text {
+        max-width: calc(100vw - 124px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
     @media (max-width: 1024px) {
       section { padding: 80px 40px; }
       #o-nas { grid-template-columns: 1fr; gap: 48px; }
