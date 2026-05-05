@@ -1,486 +1,1917 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ashina Studio — Strony Internetowe dla Lokalnych Firm</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fryzjer Łódź | ATELIER WŁOSA — Monika Szafrańska</title>
+<meta name="description" content="Salon fryzjerski w Łodzi. Strzyżenie, koloryzacja, balayage. Umów wizytę online na Booksy. Gdańska 57A, ocena 4.98/5 z 88 opinii.">
+<link rel="canonical" href="https://atelier-wlosa.pl/">
+<meta property="og:title" content="ATELIER WŁOSA — Salon fryzjerski Łódź">
+<meta property="og:description" content="Strzyżenie, koloryzacja, balayage. Gdańska 57A Łódź. Ocena 4.98/5.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:image" content="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&auto=format&fit=crop">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "ATELIER WŁOSA",
+  "image": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&auto=format&fit=crop",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Gdańska 57A",
+    "addressLocality": "Łódź",
+    "postalCode": "90-612",
+    "addressCountry": "PL"
+  },
+  "telephone": "+48515841984",
+  "url": "https://atelier-wlosa.pl",
+  "priceRange": "40-400 PLN",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.98",
+    "reviewCount": "88"
+  },
+  "openingHoursSpecification": [
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Monday","opens":"12:00","closes":"18:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Tuesday","opens":"12:00","closes":"20:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Wednesday","opens":"10:00","closes":"18:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Thursday","opens":"12:00","closes":"20:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"10:00","closes":"18:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"15:00"}
+  ],
+  "sameAs": ["https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz"],
+  "founder": {"@type":"Person","name":"Monika Szafrańska"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CUSTOM PROPERTIES
+   ============================================================ */
+:root {
+  --dark: #1a1208;
+  --dark2: #241a0e;
+  --gold: #c8a96e;
+  --gold-light: #e0c98f;
+  --gold-glow: rgba(200,169,110,0.35);
+  --cream: #f5ede0;
+  --cream-dim: rgba(245,237,224,0.7);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --nav-h: 72px;
+  --pad: clamp(60px, 10vw, 120px);
+  --container: min(1200px, 90vw);
+}
 
-    <!-- ─── MATRIX RAIN (full page background) ────────────── -->
-    <canvas id="matrixCanvas"></canvas>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--dark);
+  color: var(--cream);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+}
+body.intro-active { overflow: hidden; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--gold); color: var(--dark); }
 
-    <!-- ─── NAVIGATION ─────────────────────────────────────── -->
-    <nav id="navbar">
-      <div class="nav-container">
-        <a href="#hero" class="nav-logo">
-          <img src="/logo.png.png" alt="Ashina Studio" class="logo-img" />
-          <span class="logo-wordmark">ASHINA <span class="gold">STUDIO</span></span>
+/* ============================================================
+   GRAIN TEXTURE
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ============================================================
+   PATCHWORK BACKGROUND
+   ============================================================ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' fill='none' stroke='%23c8a96e' stroke-width='0.8'%3E%3Cg transform='translate(40,50) rotate(15)'%3E%3Cellipse cx='20' cy='28' rx='14' ry='5' transform='rotate(-22 20 28)'/%3E%3Cellipse cx='48' cy='28' rx='14' ry='5' transform='rotate(22 48 28)'/%3E%3Ccircle cx='34' cy='36' r='2.5' fill='%23c8a96e' stroke='none'/%3E%3Cellipse cx='24' cy='54' rx='8' ry='12'/%3E%3Cellipse cx='44' cy='54' rx='8' ry='12'/%3E%3Cline x1='29' y1='38' x2='26' y2='45'/%3E%3Cline x1='39' y1='38' x2='42' y2='45'/%3E%3C/g%3E%3Cg transform='translate(270,170) rotate(-8)'%3E%3Crect x='0' y='0' width='55' height='14' rx='2'/%3E%3Cline x1='7' y1='14' x2='7' y2='36'/%3E%3Cline x1='14' y1='14' x2='14' y2='36'/%3E%3Cline x1='21' y1='14' x2='21' y2='36'/%3E%3Cline x1='28' y1='14' x2='28' y2='36'/%3E%3Cline x1='35' y1='14' x2='35' y2='36'/%3E%3Cline x1='42' y1='14' x2='42' y2='36'/%3E%3Cline x1='49' y1='14' x2='49' y2='36'/%3E%3C/g%3E%3Cpath d='M25,290 C55,268 78,310 108,290 C138,270 158,310 188,290' stroke-width='1.2'/%3E%3Ccircle cx='320' cy='75' r='28'/%3E%3Cline x1='320' y1='103' x2='320' y2='130'/%3E%3Crect x='315' y='130' width='10' height='8' rx='2'/%3E%3Cg transform='translate(100,180) rotate(-30)'%3E%3Crect x='0' y='0' width='4' height='40' rx='2'/%3E%3Crect x='10' y='0' width='4' height='40' rx='2'/%3E%3Crect x='0' y='36' width='14' height='6' rx='3'/%3E%3C/g%3E%3Cg transform='translate(200,320) rotate(10)'%3E%3Cellipse cx='20' cy='20' rx='14' ry='4' transform='rotate(-18 20 20)'/%3E%3Cellipse cx='46' cy='20' rx='14' ry='4' transform='rotate(18 46 20)'/%3E%3Ccircle cx='33' cy='27' r='2' fill='%23c8a96e' stroke='none'/%3E%3Cellipse cx='22' cy='42' rx='6' ry='10'/%3E%3Cellipse cx='44' cy='42' rx='6' ry='10'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 400px 400px;
+}
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+   ============================================================ */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold-glow), 0 0 20px var(--gold-glow);
+  z-index: 10002;
+  transition: none;
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+.cursor-dot {
+  position: fixed;
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+  will-change: transform;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+  will-change: transform;
+}
+.cursor-ring.expand { width: 56px; height: 56px; border-color: var(--gold-light); }
+.cursor-dot.click { transform: translate(-50%,-50%) scale(0.5); }
+.cursor-ring.click { transform: translate(-50%,-50%) scale(0.8); }
+
+/* ============================================================
+   MUTE BUTTON
+   ============================================================ */
+#mute-btn {
+  position: fixed;
+  top: 20px; right: 24px;
+  z-index: 10001;
+  width: 40px; height: 40px;
+  background: rgba(26,18,8,0.7);
+  border: 1px solid rgba(200,169,110,0.25);
+  border-radius: 50%;
+  cursor: none;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.3s;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+#mute-btn.visible { opacity: 1; }
+#mute-btn:hover { border-color: var(--gold); }
+#mute-btn svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; }
+
+/* ============================================================
+   INTRO OVERLAY
+   ============================================================ */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: var(--dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+#intro.dismissed { transform: translateY(-100%); }
+#intro-scissors {
+  width: 100px; height: 100px;
+}
+#intro-scissors .blade {
+  stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round;
+  stroke-dasharray: 200; stroke-dashoffset: 200;
+  animation: draw 1.6s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+#intro-scissors .blade:nth-child(2) { animation-delay: 0.3s; }
+#intro-scissors .handle {
+  stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round;
+  stroke-dasharray: 120; stroke-dashoffset: 120;
+  animation: draw 1s cubic-bezier(0.4,0,0.2,1) 0.9s forwards;
+}
+#intro-scissors .handle:nth-child(4) { animation-delay: 1.1s; }
+#intro-scissors .pivot {
+  fill: var(--gold); stroke: none;
+  opacity: 0; animation: fadeIn 0.4s ease 0.8s forwards;
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadeIn { to { opacity: 1; } }
+
+#intro-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  letter-spacing: 0.25em;
+  color: var(--cream);
+  opacity: 0;
+  animation: fadeIn 0.8s ease 1.8s forwards;
+  text-transform: uppercase;
+}
+#intro-enter {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  opacity: 0;
+  animation: pulse 2s ease 2.6s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+#intro-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  opacity: 0;
+  animation: fadeIn 0.6s ease 2.4s forwards;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10000;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 60px);
+  background: rgba(26,18,8,0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(200,169,110,0.08);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+}
+#nav.visible { opacity: 1; pointer-events: all; }
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  color: var(--cream);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.nav-links {
+  display: flex;
+  gap: clamp(16px, 3vw, 40px);
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  background: var(--gold);
+  color: var(--dark);
+  font-weight: 700;
+  border-radius: 2px;
+  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s ease;
+  display: inline-block;
+}
+.nav-cta:hover { box-shadow: 0 4px 24px var(--gold-glow); }
+
+/* Hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px; height: 1.5px;
+  background: var(--cream);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.nav-mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--dark);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.nav-mobile-overlay.open { opacity: 1; display: flex; }
+.nav-mobile-overlay a {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-style: italic;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+}
+.nav-mobile-overlay a:hover { color: var(--gold); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: -20%;
+  background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(26,18,8,0.3) 0%,
+    rgba(26,18,8,0.15) 40%,
+    rgba(26,18,8,0.7) 80%,
+    rgba(26,18,8,0.95) 100%
+  );
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 20px;
+  max-width: 900px;
+}
+.hero-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: block;
+}
+.hero-content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 0.9;
+  color: var(--cream);
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+.hero-content h1 span { color: var(--gold); }
+.hero-subtitle {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  color: var(--cream-dim);
+  letter-spacing: 0.08em;
+  margin-bottom: 48px;
+}
+.hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--gold);
+  color: var(--dark);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s;
+}
+.btn-primary:hover { box-shadow: 0 8px 32px var(--gold-glow); }
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  border: 1px solid rgba(200,169,110,0.4);
+  color: var(--cream);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: border-color 0.3s, background 0.3s;
+}
+.btn-outline:hover { border-color: var(--gold); background: rgba(200,169,110,0.08); }
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+  opacity: 0.7;
+}
+.hero-scroll span {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.scroll-line {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollDrop 2s ease-in-out infinite;
+}
+@keyframes scrollDrop {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ============================================================
+   SECTIONS — SHARED
+   ============================================================ */
+section { padding: var(--pad) 0; }
+.container { width: var(--container); margin: 0 auto; }
+.section-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--cream);
+  margin-bottom: 24px;
+}
+.divider {
+  width: 48px; height: 1px;
+  background: var(--gold);
+  margin-bottom: 32px;
+}
+
+/* ============================================================
+   REVEAL ANIMATIONS
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.active, .reveal-left.active, .reveal-right.active {
+  opacity: 1;
+  transform: translate(0);
+}
+.stagger > *:nth-child(1) { transition-delay: 0s; }
+.stagger > *:nth-child(2) { transition-delay: 0.1s; }
+.stagger > *:nth-child(3) { transition-delay: 0.2s; }
+.stagger > *:nth-child(4) { transition-delay: 0.3s; }
+.stagger > *:nth-child(5) { transition-delay: 0.4s; }
+.stagger > *:nth-child(6) { transition-delay: 0.5s; }
+
+/* ============================================================
+   O NAS
+   ============================================================ */
+#o-nas { background: var(--dark2); }
+.onas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: center;
+}
+.onas-img-wrap {
+  position: relative;
+}
+.onas-img-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -16px -16px auto auto;
+  width: 70%;
+  height: 70%;
+  border: 1px solid rgba(200,169,110,0.2);
+  border-radius: 2px;
+  z-index: 0;
+}
+.onas-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.onas-text p {
+  color: var(--cream-dim);
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+}
+.onas-text p strong { color: var(--gold); font-weight: 700; }
+.stats-row {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(200,169,110,0.15);
+}
+.stat-item { text-align: center; }
+.stat-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-top: 6px;
+  display: block;
+}
+
+/* ============================================================
+   USŁUGI
+   ============================================================ */
+.services-header {
+  text-align: center;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+.services-header .divider { margin: 0 auto 32px; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.service-card {
+  background: rgba(200,169,110,0.05);
+  border: 1px solid rgba(200,169,110,0.1);
+  border-radius: 4px;
+  padding: clamp(24px, 3vw, 36px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+  border-color: rgba(200,169,110,0.25);
+}
+.service-card:hover::before { opacity: 1; }
+.service-icon {
+  width: 44px; height: 44px;
+  margin-bottom: 20px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.service-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+.service-desc {
+  font-size: 0.88rem;
+  color: var(--cream-dim);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+.service-price {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  transition: color 0.3s;
+}
+.service-link:hover { color: var(--gold); }
+.service-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* ============================================================
+   REZERWACJA
+   ============================================================ */
+#rezerwacja {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.rez-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1521590832167-7228fcb25e68?w=1600&auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.25) saturate(0.6);
+}
+.rez-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: var(--pad) 20px;
+  width: 100%;
+}
+.rez-content .section-title { color: var(--cream); margin-bottom: 16px; }
+.rez-content p {
+  color: var(--cream-dim);
+  max-width: 480px;
+  margin: 0 auto 40px;
+}
+.rez-ornament {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.06;
+  width: 200px;
+}
+
+/* ============================================================
+   GALERIA PREVIEW
+   ============================================================ */
+#galeria-preview { background: var(--dark2); }
+.gallery-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+.gallery-preview-grid {
+  columns: 3;
+  column-gap: 14px;
+}
+.gallery-preview-grid .g-item {
+  break-inside: avoid;
+  margin-bottom: 14px;
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: none;
+  position: relative;
+}
+.gallery-preview-grid .g-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(200,169,110,0);
+  transition: background 0.4s;
+}
+.gallery-preview-grid .g-item:hover::after { background: rgba(200,169,110,0.08); }
+.gallery-preview-grid img {
+  width: 100%;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.gallery-preview-grid .g-item:hover img { transform: scale(1.04); }
+.gallery-more {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ============================================================
+   OPINIE
+   ============================================================ */
+.reviews-rating {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.reviews-score {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+.reviews-stars {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 12px 0 8px;
+}
+.reviews-stars svg { width: 20px; height: 20px; fill: var(--gold); }
+.reviews-count {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.review-card {
+  background: rgba(200,169,110,0.04);
+  border: 1px solid rgba(200,169,110,0.1);
+  border-radius: 4px;
+  padding: 32px;
+}
+.review-text {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.review-text::before { content: '\201E'; color: var(--gold); font-size: 1.8rem; line-height: 0; vertical-align: -0.3em; margin-right: 4px; }
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.review-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(200,169,110,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--gold);
+}
+.review-name { font-size: 0.85rem; font-weight: 700; color: var(--cream); }
+.review-stars { display: flex; gap: 3px; margin-top: 2px; }
+.review-stars svg { width: 12px; height: 12px; fill: var(--gold); }
+
+/* ============================================================
+   KONTAKT
+   ============================================================ */
+#kontakt { background: var(--dark2); }
+.kontakt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: start;
+}
+.kontakt-info .section-title { margin-bottom: 16px; }
+.kontakt-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.kontakt-icon {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(200,169,110,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.kontakt-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; }
+.kontakt-detail-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 4px;
+}
+.kontakt-detail-value {
+  color: var(--cream);
+  font-size: 1rem;
+}
+.kontakt-detail-value a { color: var(--cream); transition: color 0.3s; }
+.kontakt-detail-value a:hover { color: var(--gold); }
+.hours-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.hours-table td {
+  padding: 6px 0;
+  font-size: 0.9rem;
+  color: var(--cream-dim);
+  border-bottom: 1px solid rgba(200,169,110,0.07);
+}
+.hours-table td:last-child { text-align: right; color: var(--cream); }
+.hours-table tr:last-child td { border-bottom: none; }
+.map-wrap {
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(200,169,110,0.12);
+  aspect-ratio: 4/3;
+}
+.map-wrap iframe {
+  width: 100%; height: 100%;
+  display: block;
+  filter: grayscale(0.4) sepia(0.3) brightness(0.85);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  border-top: 1px solid rgba(200,169,110,0.1);
+  padding: 32px 0;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--cream-dim);
+  letter-spacing: 0.1em;
+}
+.footer-copy {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: rgba(245,237,224,0.35);
+}
+.footer-booksy {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 1px solid rgba(200,169,110,0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.3s;
+}
+.footer-booksy:hover { border-color: var(--gold); }
+
+.captcha-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(9, 8, 8, 0.78);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  z-index: 2000;
+}
+.captcha-modal.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.captcha-panel {
+  width: min(100%, 420px);
+  padding: 28px;
+  border: 1px solid rgba(200, 169, 110, 0.35);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(22, 19, 19, 0.98), rgba(10, 10, 10, 0.98));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+.captcha-kicker {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.captcha-title {
+  margin: 0 0 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  line-height: 0.95;
+}
+.captcha-copy {
+  margin: 0 0 20px;
+  color: var(--cream-dim);
+}
+.captcha-widget {
+  min-height: 70px;
+  margin-bottom: 18px;
+}
+.captcha-status {
+  min-height: 1.4em;
+  margin-bottom: 18px;
+  font-size: 0.95rem;
+  color: var(--cream-dim);
+}
+.captcha-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.captcha-actions .btn-outline,
+.captcha-actions .btn-primary {
+  justify-content: center;
+}
+body.modal-open {
+  overflow: hidden;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .onas-grid { grid-template-columns: 1fr; }
+  .onas-img-wrap { max-width: 480px; }
+  .kontakt-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+  .services-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .gallery-preview-grid { columns: 2; }
+  .stats-row { gap: 24px; }
+  .gallery-preview-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+@media (max-width: 480px) {
+  .gallery-preview-grid { columns: 1; }
+  .hero-actions { flex-direction: column; align-items: center; }
+}
+@media (hover: none) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none; }
+  .hero-bg { transform: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body class="intro-active">
+
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<!-- Cursor -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- Mute Button -->
+<button id="mute-btn" aria-label="Wycisz dźwięki">
+  <svg id="icon-on" viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+  <svg id="icon-off" viewBox="0 0 24 24" style="display:none"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+</button>
+
+<!-- Intro Overlay -->
+<div id="intro" role="dialog" aria-modal="true" aria-label="Wejście do ATELIER WŁOSA">
+  <svg id="intro-scissors" viewBox="0 0 100 100">
+    <!-- Left blade -->
+    <ellipse class="blade" cx="26" cy="30" rx="20" ry="7" transform="rotate(-28 26 30)"/>
+    <!-- Right blade -->
+    <ellipse class="blade" cx="74" cy="30" rx="20" ry="7" transform="rotate(28 74 30)"/>
+    <!-- Pivot -->
+    <circle class="pivot" cx="50" cy="46" r="3.5"/>
+    <!-- Left handle -->
+    <ellipse class="handle" cx="33" cy="68" rx="9" ry="15" transform="rotate(-5 33 68)"/>
+    <!-- Right handle -->
+    <ellipse class="handle" cx="67" cy="68" rx="9" ry="15" transform="rotate(5 67 68)"/>
+  </svg>
+  <div id="intro-name">Atelier Włosa</div>
+  <div id="intro-line"></div>
+  <div id="intro-enter">Kliknij aby wejść</div>
+</div>
+
+<!-- Mobile Nav Overlay -->
+<nav class="nav-mobile-overlay" id="mobile-nav" aria-label="Nawigacja mobilna">
+  <a href="#o-nas" class="mobile-link">O nas</a>
+  <a href="#uslugi" class="mobile-link">Usługi</a>
+  <a href="#galeria-preview" class="mobile-link">Galeria</a>
+  <a href="#opinie" class="mobile-link">Opinie</a>
+  <a href="#kontakt" class="mobile-link">Kontakt</a>
+  <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz" target="_blank" rel="noopener" style="color:var(--gold)">Umów wizytę</a>
+</nav>
+
+<!-- Navigation -->
+<nav id="nav" aria-label="Główna nawigacja">
+  <a href="#" class="nav-logo">Atelier Włosa</a>
+  <ul class="nav-links">
+    <li><a href="#o-nas">O nas</a></li>
+    <li><a href="#uslugi">Usługi</a></li>
+    <li><a href="#galeria-preview">Galeria</a></li>
+    <li><a href="#opinie">Opinie</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz"
+     class="nav-cta magnetic" target="_blank" rel="noopener">Umów wizytę</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Otwórz menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero">
+  <div class="hero-bg" id="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content reveal">
+    <span class="hero-eyebrow">Gdańska 57A, Łódź</span>
+    <h1><em>Sztuka<br><span>Włosa</span></em></h1>
+    <p class="hero-subtitle">Salon fryzjerski Moniki Szafrańskiej</p>
+    <div class="hero-actions">
+      <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz"
+         class="btn-primary magnetic" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Umów wizytę
+      </a>
+      <a href="#galeria-preview" class="btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Zobacz galerie
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     O NAS
+     ============================================================ -->
+<section id="o-nas">
+  <div class="container">
+    <div class="onas-grid">
+      <div class="onas-img-wrap reveal-left">
+        <img class="onas-img"
+             src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80"
+             alt="Monika Szafrańska — właścicielka ATELIER WŁOSA w Łodzi"
+             width="800" height="1067"
+             loading="lazy"
+             onerror="this.src='https://picsum.photos/seed/monika/800/1067'">
+      </div>
+      <div class="onas-text reveal-right">
+        <span class="section-label">O salonie</span>
+        <h2 class="section-title">Każdy włos<br>to osobna historia</h2>
+        <div class="divider"></div>
+        <p>Witaj w <strong>ATELIER WŁOSA</strong> — miejscu, gdzie fryzjerstwo jest rzemiosłem, nie rutyną. Jestem <strong>Monika Szafrańska</strong> i od ponad 8 lat tworzę fryzury, które podkreślają naturalną piękność każdej kobiety i mężczyzny.</p>
+        <p>Mój salon przy <strong>Gdańskiej 57A</strong> to przestrzeń, w której czas płynie inaczej. Słuchasz muzyki, pijesz dobrą kawę i wychodzisz z fryzurą dokładnie taką, o jakiej marzyłaś.</p>
+        <p>Specjalizuję się w koloryzacji, balayage i strzyżeniu — zawsze z pełnym zaangażowaniem i dbałością o stan włosów.</p>
+        <div class="stats-row stagger">
+          <div class="stat-item reveal">
+            <span class="stat-number" data-target="88">0</span>
+            <span class="stat-label">Opinii</span>
+          </div>
+          <div class="stat-item reveal">
+            <span class="stat-number" data-target="4.98" data-decimal="1">0</span>
+            <span class="stat-label">Ocena ★</span>
+          </div>
+          <div class="stat-item reveal">
+            <span class="stat-number" data-target="8">0</span>
+            <span class="stat-label">Lat doświadczenia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     USŁUGI
+     ============================================================ -->
+<section id="uslugi">
+  <div class="container">
+    <div class="services-header">
+      <span class="section-label">Czym mogę Ci pomóc</span>
+      <h2 class="section-title">Usługi</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="services-grid stagger">
+
+      <!-- Strzyżenie damskie -->
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 44 44">
+          <path d="M14 8 C14 8 22 16 22 22 C22 28 14 36 14 36"/>
+          <path d="M30 8 C30 8 22 16 22 22 C22 28 30 36 30 36"/>
+          <circle cx="14" cy="36" r="4"/>
+          <circle cx="30" cy="36" r="4"/>
+          <line x1="14" y1="32" x2="30" y2="12" stroke-width="1.2"/>
+        </svg>
+        <div class="service-name">Strzyżenie damskie</div>
+        <div class="service-desc">Precyzyjne strzyżenie dopasowane do kształtu twarzy i stylu życia. Mycie, suszenie i stylizacja w cenie.</div>
+        <div class="service-price">od 80 zł</div>
+        <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz" target="_blank" rel="noopener" class="service-link">
+          Zarezerwuj
+          <svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </a>
-        <ul class="nav-links">
-          <li><a href="#services">Usługi</a></li>
-          <li><a href="#work">Realizacje</a></li>
-          <li><a href="#about">O nas</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact" class="nav-cta">Umów rozmowę</a></li>
-        </ul>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
       </div>
-      <!-- Mobile menu -->
-      <div class="nav-mobile" id="navMobile">
-        <a href="#services" class="mobile-link">Usługi</a>
-        <a href="#work" class="mobile-link">Realizacje</a>
-        <a href="#about" class="mobile-link">O nas</a>
-        <a href="#faq" class="mobile-link">FAQ</a>
-        <a href="#contact" class="mobile-link cta">Umów rozmowę</a>
+
+      <!-- Strzyżenie męskie -->
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 44 44">
+          <rect x="8" y="8" width="28" height="8" rx="2"/>
+          <line x1="11" y1="16" x2="11" y2="32"/>
+          <line x1="15" y1="16" x2="15" y2="32"/>
+          <line x1="19" y1="16" x2="19" y2="32"/>
+          <line x1="23" y1="16" x2="23" y2="32"/>
+          <line x1="27" y1="16" x2="27" y2="32"/>
+          <line x1="31" y1="16" x2="31" y2="32"/>
+          <line x1="8" y1="32" x2="36" y2="32"/>
+        </svg>
+        <div class="service-name">Strzyżenie męskie</div>
+        <div class="service-desc">Klasyczne i nowoczesne strzyżenia męskie. Precyzja i dbałość o detal, zawsze ze stylizacją na wynos.</div>
+        <div class="service-price">od 40 zł</div>
+        <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz" target="_blank" rel="noopener" class="service-link">
+          Zarezerwuj
+          <svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </a>
       </div>
-    </nav>
 
-    <!-- ─── HERO ───────────────────────────────────────────── -->
-    <section id="hero">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span class="badge-dot"></span>
-          Przyjmujemy nowych klientów
-        </div>
-        <h1 class="hero-title">
-          Tworzymy Strony<br>
-          <span class="hero-highlight" id="typedText"></span>
-        </h1>
-        <p class="hero-subtitle">
-          Profesjonalne strony internetowe dla lokalnych firm — efektowny design, płynne animacje, system rezerwacji i powiadomienia e-mail. Zrobimy wszystko, żeby Twoi klienci byli pod wrażeniem.
-        </p>
-        <div class="hero-buttons">
-          <a href="#contact" class="btn btn-primary">Zacznij projekt</a>
-          <a href="#work" class="btn btn-outline">Zobacz realizacje</a>
-        </div>
+      <!-- Koloryzacja -->
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 44 44">
+          <path d="M14 6 L14 28 Q14 36 22 36 Q30 36 30 28 L30 26"/>
+          <path d="M14 12 L30 12"/>
+          <path d="M30 6 Q36 12 30 18"/>
+          <circle cx="30" cy="6" r="2" fill="currentColor"/>
+        </svg>
+        <div class="service-name">Koloryzacja</div>
+        <div class="service-desc">Pełna koloryzacja, odrosty, rozjaśnianie. Używamy profesjonalnych farb dbających o kondycję włosów.</div>
+        <div class="service-price">od 150 zł</div>
+        <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz" target="_blank" rel="noopener" class="service-link">
+          Zarezerwuj
+          <svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </a>
       </div>
-      <div class="hero-scroll-hint">
-        <div class="scroll-line"></div>
-        <span>Przewiń</span>
+
+      <!-- Balayage -->
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 44 44">
+          <path d="M10 6 C10 6 8 22 16 32 C20 37 28 37 32 32 C36 27 34 18 30 12"/>
+          <path d="M10 6 C14 10 20 8 24 14 C28 20 26 28 22 32"/>
+          <path d="M30 12 C26 16 22 14 20 20"/>
+        </svg>
+        <div class="service-name">Balayage / Ombre</div>
+        <div class="service-desc">Naturalne przejścia kolorów, efekt słońca i głębi. Techniki ręcznego malowania dla wyjątkowego efektu.</div>
+        <div class="service-price">od 250 zł</div>
+        <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz" target="_blank" rel="noopener" class="service-link">
+          Zarezerwuj
+          <svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </a>
       </div>
-    </section>
 
-    <!-- ─── SERVICES ──────────────────────────────────────── -->
-    <section id="services">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Co robimy</span>
-          <h2>Wszystko, czego Twoja firma potrzebuje w sieci</h2>
-          <p>Od projektu graficznego po w pełni działające funkcje — zajmujemy się wszystkim, żebyś mógł skupić się na prowadzeniu firmy.</p>
-        </div>
-        <div class="services-grid">
-
-          <div class="service-card reveal">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-            </div>
-            <h3>Indywidualny projekt strony</h3>
-            <p>Piękne, unikalne strony dopasowane do Twojej marki. Żadnych szablonów — każda strona tworzona od zera specjalnie dla Ciebie.</p>
-          </div>
-
-          <div class="service-card reveal">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </div>
-            <h3>Animacje i efekty</h3>
-            <p>Płynne, przyciągające wzrok animacje, które zatrzymują odwiedzających na dłużej i sprawiają, że zapamiętają Twoją firmę.</p>
-          </div>
-
-          <div class="service-card reveal">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01"/></svg>
-            </div>
-            <h3>System rezerwacji</h3>
-            <p>Wbudowany system rezerwacji z automatycznymi powiadomieniami e-mail — klienci umawiają się online, Ty dostajesz powiadomienie od razu.</p>
-          </div>
-
-          <div class="service-card reveal">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-            </div>
-            <h3>Wersja mobilna</h3>
-            <p>Każda strona wygląda i działa perfekcyjnie na telefonach, tabletach i komputerach. Twoi klienci przeglądają na telefonie — jesteśmy na to gotowi.</p>
-          </div>
-
-          <div class="service-card reveal">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            </div>
-            <h3>Optymalizacja SEO</h3>
-            <p>Twoja firma pojawia się w Google. Budujemy strony, które wyszukiwarki uwielbiają — nowi klienci znajdą Cię sami.</p>
-          </div>
-
-          <div class="service-card reveal">
-            <div class="service-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3>Szybka i bezpieczna</h3>
-            <p>Błyskawiczne ładowanie i nowoczesne zabezpieczenia — Twoi klienci zawsze mają najlepsze doświadczenie na stronie.</p>
-          </div>
-
-        </div>
+      <!-- Keratyna -->
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 44 44">
+          <path d="M10 10 C10 10 18 14 18 22 C18 30 10 34 10 34"/>
+          <path d="M34 10 C34 10 26 14 26 22 C26 30 34 34 34 34"/>
+          <line x1="14" y1="18" x2="30" y2="18" stroke-dasharray="3 2"/>
+          <line x1="14" y1="22" x2="30" y2="22" stroke-dasharray="3 2"/>
+          <line x1="14" y1="26" x2="30" y2="26" stroke-dasharray="3 2"/>
+        </svg>
+        <div class="service-name">Keratynowe prostowanie</div>
+        <div class="service-desc">Profesjonalne prostowanie keratynowe — gładkość, blask i mniej czasu na stylizację przez miesiące.</div>
+        <div class="service-price">od 300 zł</div>
+        <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz" target="_blank" rel="noopener" class="service-link">
+          Zarezerwuj
+          <svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </a>
       </div>
-    </section>
 
-
-    <!-- ─── STATS ─────────────────────────────────────────── -->
-    <section id="stats">
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat-item reveal">
-            <span class="stat-number gold">100<span class="stat-plus">%</span></span>
-            <span class="stat-label">Zadowolenie klientów</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item reveal">
-            <span class="stat-number gold">7<span class="stat-suffix"> dni</span></span>
-            <span class="stat-label">Śr. czas realizacji</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item reveal">
-            <span class="stat-number gold">24<span class="stat-suffix">/7</span></span>
-            <span class="stat-label">Wsparcie</span>
-          </div>
-        </div>
+      <!-- Modelowanie -->
+      <div class="service-card reveal">
+        <svg class="service-icon" viewBox="0 0 44 44">
+          <circle cx="22" cy="12" r="7"/>
+          <path d="M12 30 C12 24 17 20 22 20 C27 20 32 24 32 30"/>
+          <path d="M8 38 C8 32 14 28 22 28 C30 28 36 32 36 38"/>
+          <line x1="6" y1="38" x2="38" y2="38"/>
+        </svg>
+        <div class="service-name">Modelowanie / Upięcia</div>
+        <div class="service-desc">Stylizacje okolicznościowe, upięcia, loki. Przygotujemy Cię na każdą wyjątkową chwilę.</div>
+        <div class="service-price">od 60 zł</div>
+        <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz" target="_blank" rel="noopener" class="service-link">
+          Zarezerwuj
+          <svg viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+        </a>
       </div>
-    </section>
 
-    <!-- ─── PRICING ─────────────────────────────────────────── -->
-    <section id="pricing">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Cennik</span>
-          <h2>Przejrzyste ceny bez niespodzianek</h2>
-          <p>Żadnych ukrytych opłat. Wybierz plan dopasowany do swojej firmy i zaistniej w sieci szybko.</p>
-        </div>
-        <div class="pricing-grid">
+    </div>
+  </div>
+</section>
 
-          <!-- ── BASIC ── -->
-          <div class="pricing-card reveal">
-            <div class="pricing-header">
-              <h3>Basic</h3>
-              <div class="pricing-price">
-                <span class="price-amount">250<span class="price-currency"> zł</span></span>
-              </div>
-              <span class="price-setup">jednorazowa konfiguracja</span>
-              <div class="pricing-monthly">+ 25 zł / mies. <span class="price-note">· hosting w cenie</span></div>
-            </div>
-            <ul class="pricing-features">
-              <li><span class="feat-check">✓</span> Indywidualny projekt strony</li>
-              <li><span class="feat-check">✓</span> Do 5 podstron</li>
-              <li><span class="feat-check">✓</span> Wersja mobilna</li>
-              <li><span class="feat-check">✓</span> Podstawowe SEO</li>
-              <li><span class="feat-check">✓</span> Hosting w cenie</li>
-            </ul>
-            <a href="#contact" class="btn btn-outline pricing-btn">Zacznij teraz</a>
-          </div>
+<!-- ============================================================
+     REZERWACJA
+     ============================================================ -->
+<section id="rezerwacja">
+  <div class="rez-bg"></div>
+  <!-- Floating scissors ornament -->
+  <svg class="rez-ornament" viewBox="0 0 100 100" fill="none" stroke="var(--gold)" stroke-width="1">
+    <ellipse cx="26" cy="30" rx="20" ry="7" transform="rotate(-28 26 30)"/>
+    <ellipse cx="74" cy="30" rx="20" ry="7" transform="rotate(28 74 30)"/>
+    <circle cx="50" cy="46" r="3.5" fill="var(--gold)" stroke="none"/>
+    <ellipse cx="33" cy="68" rx="9" ry="15"/>
+    <ellipse cx="67" cy="68" rx="9" ry="15"/>
+  </svg>
+  <div class="rez-content container reveal">
+    <span class="section-label">Booksy</span>
+    <h2 class="section-title">Zarezerwuj wizytę<br>już dziś</h2>
+    <p>Sprawdź dostępne terminy i zarezerwuj online w dowolnym momencie — bez telefonu, bez czekania.</p>
+    <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz"
+       class="btn-primary magnetic" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Otwórz Booksy
+    </a>
+  </div>
+</section>
 
-          <!-- ── PRO (featured) ── -->
-          <div class="pricing-card pricing-featured reveal">
-            <div class="pricing-header">
-              <div class="pricing-badge-top">Najpopularniejszy</div>
-              <h3>Pro</h3>
-              <div class="pricing-price">
-                <span class="price-amount">500<span class="price-currency"> zł</span></span>
-              </div>
-              <span class="price-setup">jednorazowa konfiguracja</span>
-              <div class="pricing-monthly">+ 50 zł / mies. <span class="price-note">· hosting i obsługa</span></div>
-              <div class="pricing-monthly" style="margin-top:6px; font-size:11px; opacity:0.6;">* Ostateczna cena ustalana na końcu projektu</div>
-            </div>
-            <ul class="pricing-features">
-              <li><span class="feat-check">✓</span> Wszystko z planu Basic</li>
-              <li><span class="feat-check">✓</span> Animacje i efekty</li>
-              <li><span class="feat-check">✓</span> System rezerwacji</li>
-              <li><span class="feat-check">✓</span> Powiadomienia e-mail</li>
-              <li><span class="feat-check">✓</span> Ochrona bezpieczeństwa</li>
-              <li><span class="feat-check">✓</span> Optymalizacja SEO</li>
-              <li><span class="feat-check">✓</span> Osobiste wsparcie i zmiany</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary pricing-btn">Zacznij teraz</a>
-          </div>
-
-          <!-- ── PREMIUM (coming soon) ── -->
-          <div class="pricing-card pricing-disabled reveal">
-            <div class="pricing-header">
-              <div class="pricing-coming-soon">Niedługo</div>
-              <h3>Premium</h3>
-              <div class="pricing-price">
-                <span class="price-amount" style="font-size:2rem; color:#555;">–</span>
-              </div>
-              <span class="price-setup" style="color:#444;">cena jeszcze nie ustalona</span>
-              <div class="pricing-monthly price-coming">Pracujemy nad tym planem</div>
-            </div>
-            <ul class="pricing-features">
-              <li><span class="feat-check">✓</span> Wszystko z planu Pro</li>
-              <li class="feature-ads"><span class="feat-star">★</span> Zarządzanie reklamami w social mediach</li>
-              <li class="feature-ads"><span class="feat-star">★</span> Miesięczne kampanie reklamowe</li>
-              <li class="feature-ads"><span class="feat-star">★</span> Raporty wyników i zasięgów</li>
-            </ul>
-            <button class="btn btn-outline pricing-btn" disabled>Niedługo dostępny</button>
-          </div>
-
-        </div>
+<!-- ============================================================
+     GALERIA PREVIEW
+     ============================================================ -->
+<section id="galeria-preview">
+  <div class="container">
+    <div class="gallery-preview-header">
+      <div class="reveal-left">
+        <span class="section-label">Nasze prace</span>
+        <h2 class="section-title">Galeria</h2>
       </div>
-    </section>
-
-    <!-- ─── WORK / PORTFOLIO ───────────────────────────────── -->
-    <section id="work">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Nasze realizacje</span>
-          <h2>Stworzone dla lokalnych firm</h2>
-          <p>Prawdziwe strony, prawdziwe efekty. Każda zaprojektowana tak, żeby zamieniała odwiedzających w klientów.</p>
-        </div>
-        <div class="work-grid">
-
-          <div class="work-card reveal">
-            <a href="https://judintatto.win" target="_blank" rel="noopener" class="work-preview" style="background: linear-gradient(135deg, #0a0608 0%, #1a0d10 50%, #0d0a0b 100%);">
-              <div class="work-live-content">
-                <div class="work-live-domain">judintatto.win</div>
-                <div class="work-live-cta">Zobacz stronę →</div>
-              </div>
-            </a>
-            <div class="work-info">
-              <h3>Judin Tattoo</h3>
-              <span class="work-tag">Salon tatuażu</span>
-            </div>
-          </div>
-
-          <div class="work-card reveal">
-            <div class="work-preview" style="background: linear-gradient(135deg, #2d1b00 0%, #1a0f00 100%);">
-              <div class="work-coming">
-                <span class="green">Wkrótce</span>
-              </div>
-            </div>
-            <div class="work-info">
-              <h3>Bella Nails</h3>
-              <span class="work-tag">Salon urody</span>
-            </div>
-          </div>
-
-          <div class="work-card reveal">
-            <div class="work-preview" style="background: linear-gradient(135deg, #001a0f 0%, #000d08 100%);">
-              <div class="work-coming">
-                <span class="green">Wkrótce</span>
-              </div>
-            </div>
-            <div class="work-info">
-              <h3>Elite Plumbing</h3>
-              <span class="work-tag">Usługi domowe</span>
-            </div>
-          </div>
-
-        </div>
+      <a href="galeria.html" class="btn-outline reveal-right" style="white-space:nowrap">
+        Cała galeria
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </a>
+    </div>
+    <div class="gallery-preview-grid stagger">
+      <div class="g-item reveal">
+        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&auto=format&fit=crop&q=80"
+             alt="Efekt koloryzacji — ATELIER WŁOSA Łódź"
+             width="600" height="800" loading="lazy"
+             onerror="this.src='https://picsum.photos/seed/g1/600/800'">
       </div>
-    </section>
+      <div class="g-item reveal">
+        <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=600&auto=format&fit=crop&q=80"
+             alt="Balayage — salon fryzjerski Łódź"
+             width="600" height="450" loading="lazy"
+             onerror="this.src='https://picsum.photos/seed/g2/600/450'">
+      </div>
+      <div class="g-item reveal">
+        <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=600&auto=format&fit=crop&q=80"
+             alt="Profesjonalne strzyżenie — ATELIER WŁOSA"
+             width="600" height="700" loading="lazy"
+             onerror="this.src='https://picsum.photos/seed/g3/600/700'">
+      </div>
+      <div class="g-item reveal">
+        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&auto=format&fit=crop&q=80"
+             alt="Stylizacja włosów — salon Łódź"
+             width="600" height="400" loading="lazy"
+             onerror="this.src='https://picsum.photos/seed/g4/600/400'">
+      </div>
+      <div class="g-item reveal">
+        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&auto=format&fit=crop&q=80"
+             alt="Koloryzacja włosów — Monika Szafrańska"
+             width="600" height="500" loading="lazy"
+             onerror="this.src='https://picsum.photos/seed/g5/600/500'">
+      </div>
+      <div class="g-item reveal">
+        <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?w=600&auto=format&fit=crop&q=80"
+             alt="Fryzura po strzyżeniu — ATELIER WŁOSA Łódź"
+             width="600" height="750" loading="lazy"
+             onerror="this.src='https://picsum.photos/seed/g6/600/750'">
+      </div>
+    </div>
+    <div class="gallery-more reveal">
+      <a href="galeria.html" class="btn-outline">
+        Zobacz wszystkie realizacje
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
 
-    <!-- ─── ABOUT ─────────────────────────────────────────── -->
-    <section id="about">
-      <div class="container">
-        <div class="about-grid">
-          <div class="about-text reveal">
-            <span class="section-tag">O nas</span>
-            <h2>Pomagamy lokalnym firmom zaistnieć w sieci</h2>
-            <p>W Ashina Studio wierzymy, że każda mała firma zasługuje na stronę internetową najwyższej klasy. Łączymy elegancki design z potężnymi funkcjami — systemem rezerwacji, powiadomieniami e-mail i animacjami — żeby Twoja firma miała silną obecność w internecie.</p>
-            <p>Żadnego technicznego żargonu. Zajmujemy się wszystkim od początku do końca i oddajemy stronę, którą z dumą będziesz pokazywać innym.</p>
-            <a href="#contact" class="btn btn-primary">Współpracuj z nami</a>
-          </div>
-          <div class="about-visual reveal">
-            <div class="about-card">
-              <div class="about-card-line green-text">
-                <span class="code-comment">// Ashina Studio</span>
-              </div>
-              <div class="about-card-line">
-                <span class="code-key gold">const</span>
-                <span class="code-var"> website </span>
-                <span class="code-op">=</span>
-                <span class="code-str green-text"> "stunning"</span>
-              </div>
-              <div class="about-card-line">
-                <span class="code-key gold">const</span>
-                <span class="code-var"> booking </span>
-                <span class="code-op">=</span>
-                <span class="code-str green-text"> "automated"</span>
-              </div>
-              <div class="about-card-line">
-                <span class="code-key gold">const</span>
-                <span class="code-var"> client </span>
-                <span class="code-op">=</span>
-                <span class="code-str green-text"> "happy"</span>
-              </div>
-              <div class="about-card-line">
-                <span class="code-key gold">return</span>
-                <span class="code-var"> success</span>
-                <span class="code-cursor">|</span>
-              </div>
+<!-- ============================================================
+     OPINIE
+     ============================================================ -->
+<section id="opinie">
+  <div class="container">
+    <div class="reviews-rating reveal">
+      <span class="reviews-score">4.98</span>
+      <div class="reviews-stars">
+        <svg viewBox="0 0 20 20"><polygon points="10,2 12.4,7.5 18.5,8 14,12 15.6,18 10,15 4.4,18 6,12 1.5,8 7.6,7.5"/></svg>
+        <svg viewBox="0 0 20 20"><polygon points="10,2 12.4,7.5 18.5,8 14,12 15.6,18 10,15 4.4,18 6,12 1.5,8 7.6,7.5"/></svg>
+        <svg viewBox="0 0 20 20"><polygon points="10,2 12.4,7.5 18.5,8 14,12 15.6,18 10,15 4.4,18 6,12 1.5,8 7.6,7.5"/></svg>
+        <svg viewBox="0 0 20 20"><polygon points="10,2 12.4,7.5 18.5,8 14,12 15.6,18 10,15 4.4,18 6,12 1.5,8 7.6,7.5"/></svg>
+        <svg viewBox="0 0 20 20"><polygon points="10,2 12.4,7.5 18.5,8 14,12 15.6,18 10,15 4.4,18 6,12 1.5,8 7.6,7.5"/></svg>
+      </div>
+      <div class="reviews-count">88 zweryfikowanych opinii na Booksy</div>
+    </div>
+    <div class="reviews-grid stagger">
+      <div class="review-card reveal">
+        <p class="review-text">Monika jest absolutną mistrzynią! Balayage wyszedł perfekcyjnie, dokładnie tak jak sobie wyobrażałam. Ciepła atmosfera i doskonała kawa sprawiają, że czuję się tu jak u przyjaciółki.</p>
+        <div class="review-author">
+          <div class="review-avatar">A</div>
+          <div>
+            <div class="review-name">Anna K.</div>
+            <div class="review-stars">
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
             </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ─── FAQ ─────────────────────────────────────────────── -->
-    <section id="faq">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">FAQ</span>
-          <h2>Najczęściej zadawane pytania</h2>
-          <p>Masz inne pytanie? Napisz na WhatsApp — odpowiem w ciągu godziny.</p>
-        </div>
-        <div class="faq-list reveal">
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Ile trwa wykonanie strony?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Zazwyczaj 5–10 dni roboczych od momentu zebrania wszystkich materiałów (logo, zdjęcia, teksty). Prostsze strony potrafię oddać nawet w 3 dni.</p>
+      <div class="review-card reveal">
+        <p class="review-text">Najlepszy fryzjer w Łodzi. Chodzę od 3 lat i za każdym razem jestem zachwycona. Monika zawsze doradzi, wysłucha i zrobi dokładnie to, o co prosisz — lub lepiej.</p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-name">Marta W.</div>
+            <div class="review-stars">
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
             </div>
           </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Co potrzebuję przygotować przed startem?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Logo lub nazwę firmy, kilka zdjęć (mogą być ze smartfona), krótki opis działalności i dane kontaktowe. Resztą — projekt, kod, hosting — zajmuję się ja.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Czy po oddaniu strony mogę sam zmieniać treści?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Drobne zmiany (teksty, godziny, ceny) możesz zgłaszać do mnie — w planie Pro i Premium są wliczone. Większe zmiany wyceniamy indywidualnie.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Co obejmuje miesięczna opłata?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Hosting strony, certyfikat SSL (kłódka przy adresie), kopie zapasowe i gotowość do drobnych poprawek. Bez tego co miesiąc strona po prostu działa i jest bezpieczna.</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
-              Czy robisz strony dla każdej branży?
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">
-              <p>Specjalizuję się w lokalnych firmach usługowych — salony, restauracje, rzemiosło, gabinety, sklepy. Jeśli masz wątpliwości czy pasujesz, napisz — ocenię za darmo.</p>
-            </div>
-          </div>
-
         </div>
       </div>
-    </section>
-
-    <!-- ─── CONTACT / BOOKING ─────────────────────────────── -->
-    <section id="contact">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="section-tag">Zacznij</span>
-          <h2>Umów bezpłatną konsultację</h2>
-          <p>Opowiedz nam o swojej firmie, a my stworzymy stronę, która wyróżni Cię na tle konkurencji.</p>
-        </div>
-        <form id="appointmentForm" class="contact-form reveal">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="name">Imię i nazwisko</label>
-              <input type="text" id="name" name="name" placeholder="Jan Kowalski" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Adres e-mail</label>
-              <input type="email" id="email" name="email" placeholder="jan@twojafirma.pl" required />
-            </div>
-            <div class="form-group">
-              <label for="phone">Numer telefonu</label>
-              <input type="tel" id="phone" name="phone" placeholder="+48 000 000 000" />
-            </div>
-            <div class="form-group">
-              <label for="business">Rodzaj działalności</label>
-              <input type="text" id="business" name="business" placeholder="np. Fryzjer, Restauracja, Salon..." />
-            </div>
-            <div class="form-group">
-              <label for="date">Preferowana data</label>
-              <input type="text" id="date" name="date" placeholder="Wybierz datę..." required readonly />
-            </div>
-            <div class="form-group form-full">
-              <label for="message">Opowiedz nam o projekcie</label>
-              <textarea id="message" name="message" placeholder="Czym zajmuje się Twoja firma? Co powinno znaleźć się na stronie?" rows="4"></textarea>
+      <div class="review-card reveal">
+        <p class="review-text">Profesjonalizm i ciepła atmosfera w jednym miejscu. Keratynowe prostowanie zrobione perfekcyjnie — włosy wyglądają i czują się fantastycznie. Polecam każdemu!</p>
+        <div class="review-author">
+          <div class="review-avatar">K</div>
+          <div>
+            <div class="review-name">Katarzyna M.</div>
+            <div class="review-stars">
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
+              <svg viewBox="0 0 12 12"><polygon points="6,1 7.5,4.5 11,5 8.5,7 9.2,11 6,9.5 2.8,11 3.5,7 1,5 4.5,4.5"/></svg>
             </div>
           </div>
-          <div class="form-submit">
-            <div class="h-captcha" data-sitekey="81145be6-9b5a-4ae4-9b40-ba3273ec97ee" data-theme="dark"></div>
-            <button type="submit" class="btn btn-primary btn-large">
-              <span id="btnText">Wyślij wiadomość</span>
-            </button>
-          </div>
-          <div id="formSuccess" class="form-success hidden">
-            <span class="green">✓</span> Wiadomość wysłana! Odezwiemy się w ciągu 24 godzin.
-          </div>
-        </form>
-
-        <div class="contact-alt reveal">
-          <p class="contact-alt-label">Wolisz napisać bezpośrednio?</p>
-          <div class="contact-alt-buttons">
-            <a href="https://wa.me/48510086540" target="_blank" rel="noopener" class="btn-contact-direct btn-whatsapp">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.121 1.534 5.857L.054 23.25c-.068.257.161.487.418.418l5.393-1.48A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.032-1.388l-.36-.214-3.733 1.024 1.024-3.733-.213-.36A9.806 9.806 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-              WhatsApp
-            </a>
-            <a href="tel:+48510086540" class="btn-contact-direct btn-phone">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 12a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-              510 086 540
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ─── FOOTER ────────────────────────────────────────── -->
-    <footer id="footer">
-      <div class="container">
-        <div class="footer-top">
-          <div class="footer-brand">
-            <span class="logo-wordmark">ASHINA <span class="gold">STUDIO</span></span>
-            <p>Profesjonalne strony internetowe dla lokalnych firm.</p>
-          </div>
-          <div class="footer-nav">
-            <a href="#services">Usługi</a>
-            <a href="#work">Realizacje</a>
-            <a href="#about">O nas</a>
-            <a href="#contact">Kontakt</a>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>© 2025 Ashina Studio. Wszelkie prawa zastrzeżone.</p>
-          <p class="green footer-matrix">01000001 01010011 01001000 01001001 01001110 01000001</p>
         </div>
       </div>
-    </footer>
+    </div>
+  </div>
+</section>
 
-    <!-- hCaptcha — stops spam bots from submitting the form -->
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <!-- Flatpickr calendar picker -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <!-- EmailJS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!-- ============================================================
+     KONTAKT
+     ============================================================ -->
+<section id="kontakt">
+  <div class="container">
+    <div class="kontakt-grid">
+      <div class="kontakt-info reveal-left">
+        <span class="section-label">Znajdź nas</span>
+        <h2 class="section-title">Kontakt</h2>
+        <div class="divider"></div>
+
+        <div class="kontakt-detail">
+          <div class="kontakt-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <div>
+            <span class="kontakt-detail-label">Adres</span>
+            <div class="kontakt-detail-value">Gdańska 57A<br>90-612 Łódź, Polesie</div>
+          </div>
+        </div>
+
+        <div class="kontakt-detail">
+          <div class="kontakt-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 12a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <span class="kontakt-detail-label">Telefon</span>
+            <div class="kontakt-detail-value"><a href="tel:+48515841984">515 841 984</a></div>
+          </div>
+        </div>
+
+        <div class="kontakt-detail">
+          <div class="kontakt-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div>
+            <span class="kontakt-detail-label">Godziny otwarcia</span>
+            <table class="hours-table">
+              <tr><td>Poniedziałek</td><td>12:00 – 18:00</td></tr>
+              <tr><td>Wtorek</td><td>12:00 – 20:00</td></tr>
+              <tr><td>Środa</td><td>10:00 – 18:00</td></tr>
+              <tr><td>Czwartek</td><td>12:00 – 20:00</td></tr>
+              <tr><td>Piątek</td><td>10:00 – 18:00</td></tr>
+              <tr><td>Sobota</td><td>09:00 – 15:00</td></tr>
+              <tr><td>Niedziela</td><td style="color:rgba(245,237,224,0.4)">Zamknięte</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal-right">
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2469.8!2d19.4540!3d51.7600!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471bcb5b5b5b5b5b%3A0x0!2sGda%C5%84ska+57A%2C+90-612+%C5%81%C3%B3d%C5%BA!5e0!3m2!1spl!2spl!4v1699000000000!5m2!1spl!2spl"
+            title="Mapa — ATELIER WŁOSA, Gdańska 57A Łódź"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <div style="margin-top:20px; text-align:center;">
+          <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz"
+             class="btn-primary magnetic" target="_blank" rel="noopener" style="display:inline-flex">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Umów wizytę na Booksy
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container footer-inner">
+    <a href="#" class="footer-logo">Atelier Włosa</a>
+    <p class="footer-copy">© 2024 ATELIER WŁOSA — Monika Szafrańska, Łódź</p>
+    <a href="https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz"
+       class="footer-booksy" target="_blank" rel="noopener">Booksy</a>
+  </div>
+</footer>
+
+<div class="captcha-modal" id="captcha-modal" aria-hidden="true">
+  <div class="captcha-panel" role="dialog" aria-modal="true" aria-labelledby="captcha-title">
+    <span class="captcha-kicker">Szybka weryfikacja</span>
+    <h2 class="captcha-title" id="captcha-title">PotwierdĹş, ĹĽe to Ty</h2>
+    <p class="captcha-copy">Po krótkiej weryfikacji otworzymy rezerwacjÄ™ w Booksy.</p>
+    <div class="captcha-widget" id="captcha-widget"></div>
+    <div class="captcha-status" id="captcha-status"></div>
+    <div class="captcha-actions">
+      <button type="button" class="btn-outline" id="captcha-close">Zamknij</button>
+      <button type="button" class="btn-primary" id="captcha-continue" disabled>PrzejdĹş do Booksy</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script>
+(function() {
+'use strict';
+
+/* ── HELPERS ── */
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
+const isTouchDevice = () => ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+/* ── 1. INTRO ── */
+const intro = $('#intro');
+const nav = $('#nav');
+const muteBtn = $('#mute-btn');
+let audioCtx = null;
+let isMuted = localStorage.getItem('aw-muted') === 'true';
+
+// Update mute icon state
+function syncMuteIcon() {
+  $('#icon-on').style.display = isMuted ? 'none' : 'block';
+  $('#icon-off').style.display = isMuted ? 'block' : 'none';
+}
+syncMuteIcon();
+
+// Skip intro if already seen this session
+if (sessionStorage.getItem('aw-intro-seen')) {
+  intro.style.display = 'none';
+  document.body.classList.remove('intro-active');
+  nav.classList.add('visible');
+  muteBtn.classList.add('visible');
+}
+
+intro.addEventListener('click', dismissIntro);
+intro.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') dismissIntro(); });
+
+function dismissIntro() {
+  intro.classList.add('dismissed');
+  sessionStorage.setItem('aw-intro-seen', '1');
+  initAudio();
+  setTimeout(() => {
+    intro.style.display = 'none';
+    document.body.classList.remove('intro-active');
+  }, 950);
+  nav.classList.add('visible');
+  muteBtn.classList.add('visible');
+}
+
+/* ── 2. AUDIO ── */
+function initAudio() {
+  if (audioCtx) return;
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  } catch(e) {}
+}
+
+function playSnip() {
+  if (!audioCtx || isMuted) return;
+  try {
+    // Metallic transient
+    const osc = audioCtx.createOscillator();
+    const gainOsc = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 3500;
+    filter.Q.value = 4;
+    osc.type = 'triangle';
+    osc.frequency.value = 4200;
+    gainOsc.gain.setValueAtTime(0.06, audioCtx.currentTime);
+    gainOsc.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+    osc.connect(filter);
+    filter.connect(gainOsc);
+    gainOsc.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.04);
+
+    // Noise burst
+    const bufLen = Math.floor(audioCtx.sampleRate * 0.05);
+    const buf = audioCtx.createBuffer(1, bufLen, audioCtx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < bufLen; i++) data[i] = (Math.random() * 2 - 1);
+    const src = audioCtx.createBufferSource();
+    src.buffer = buf;
+    const nFilter = audioCtx.createBiquadFilter();
+    nFilter.type = 'highpass';
+    nFilter.frequency.value = 3000;
+    const nGain = audioCtx.createGain();
+    nGain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+    nGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+    src.connect(nFilter);
+    nFilter.connect(nGain);
+    nGain.connect(audioCtx.destination);
+    src.start();
+  } catch(e) {}
+}
+
+function playWhoosh() {
+  if (!audioCtx || isMuted) return;
+  try {
+    const bufLen = Math.floor(audioCtx.sampleRate * 0.3);
+    const buf = audioCtx.createBuffer(1, bufLen, audioCtx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < bufLen; i++) data[i] = (Math.random() * 2 - 1);
+    const src = audioCtx.createBufferSource();
+    src.buffer = buf;
+    const filt = audioCtx.createBiquadFilter();
+    filt.type = 'lowpass';
+    filt.frequency.setValueAtTime(2500, audioCtx.currentTime);
+    filt.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 0.25);
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0, audioCtx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 0.05);
+    gain.gain.setValueAtTime(0.03, audioCtx.currentTime + 0.15);
+    gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.3);
+    src.connect(filt);
+    filt.connect(gain);
+    gain.connect(audioCtx.destination);
+    src.start();
+  } catch(e) {}
+}
+
+// Mute toggle
+muteBtn.addEventListener('click', () => {
+  isMuted = !isMuted;
+  localStorage.setItem('aw-muted', isMuted);
+  syncMuteIcon();
+});
+
+// Snip on all clicks
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#intro') || e.target.closest('#mute-btn')) return;
+  playSnip();
+});
+
+/* ── 3. CUSTOM CURSOR ── */
+if (!isTouchDevice()) {
+  const dot = $('#cursor-dot');
+  const ring = $('#cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top = my + 'px';
+  });
+
+  function animateCursor() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  const interactives = 'a, button, .magnetic, .g-item, .service-card, .review-card';
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest(interactives)) ring.classList.add('expand');
+  });
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest(interactives)) ring.classList.remove('expand');
+  });
+  document.addEventListener('mousedown', () => {
+    dot.classList.add('click');
+    ring.classList.add('click');
+  });
+  document.addEventListener('mouseup', () => {
+    dot.classList.remove('click');
+    ring.classList.remove('click');
+  });
+  document.addEventListener('mouseleave', () => {
+    dot.style.opacity = '0';
+    ring.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    dot.style.opacity = '1';
+    ring.style.opacity = '1';
+  });
+}
+
+/* ── 4. SCROLL EFFECTS ── */
+const progressBar = $('#scroll-progress');
+const heroBg = $('#hero-bg');
+let ticking = false;
+const isMobile = isTouchDevice();
+
+function onScroll() {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      // Progress bar
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      progressBar.style.width = (pct * 100) + '%';
+
+      // Hero parallax (desktop only)
+      if (!isMobile && heroBg) {
+        heroBg.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+      }
+
+      ticking = false;
+    });
+    ticking = true;
+  }
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* ── 5. REVEAL ON SCROLL ── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+$$('.reveal, .reveal-left, .reveal-right').forEach(el => {
+  // Skip hero content - handled separately after intro
+  if (!el.closest('#intro')) revealObserver.observe(el);
+});
+
+// Hero reveal after intro
+function revealHero() {
+  const heroContent = $('.hero-content');
+  if (heroContent) {
+    setTimeout(() => heroContent.classList.add('active'), 200);
+  }
+}
+if (sessionStorage.getItem('aw-intro-seen')) revealHero();
+else {
+  const origDismiss = intro.onclick;
+  intro.addEventListener('click', () => setTimeout(revealHero, 400));
+}
+
+/* ── 6. SECTION ENTRY SOUND ── */
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      playWhoosh();
+      sectionObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+$$('#o-nas, #uslugi, #rezerwacja, #galeria-preview, #opinie, #kontakt').forEach(s => {
+  sectionObserver.observe(s);
+});
+
+/* ── 7. COUNTER ANIMATION ── */
+function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+
+function animateCounter(el) {
+  const target = parseFloat(el.dataset.target);
+  const isDecimal = el.dataset.decimal;
+  const duration = 2000;
+  const start = performance.now();
+
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const value = target * easeOutExpo(progress);
+    el.textContent = isDecimal ? value.toFixed(2) : Math.round(value);
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = isDecimal ? target.toFixed(2) : target;
+  }
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+$$('[data-target]').forEach(el => counterObserver.observe(el));
+
+/* ── 8. MAGNETIC BUTTONS ── */
+$$('.magnetic').forEach(btn => {
+  btn.addEventListener('mousemove', (e) => {
+    const r = btn.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = e.clientY - (r.top + r.height / 2);
+    btn.style.transform = `translate(${dx * 0.3}px, ${dy * 0.3}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = 'translate(0,0)';
+  });
+});
+
+/* ── 9. MOBILE NAV ── */
+const hamburger = $('#hamburger');
+const mobileNav = $('#mobile-nav');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileNav.classList.toggle('open');
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+
+$$('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+/* â”€â”€ 10. BOOKSY CAPTCHA GATE â”€â”€ */
+const TURNSTILE_SITE_KEY = 'YOUR_CLOUDFLARE_TURNSTILE_SITE_KEY';
+const BOOKSY_URL = 'https://booksy.com/pl-pl/305944_atelier-wlosa_fryzjer_23280_lodz';
+const captchaModal = $('#captcha-modal');
+const captchaStatus = $('#captcha-status');
+const captchaClose = $('#captcha-close');
+const captchaContinue = $('#captcha-continue');
+
+let turnstileWidgetId = null;
+let captchaToken = '';
+let pendingBooksyUrl = BOOKSY_URL;
+
+function setCaptchaStatus(message) {
+  captchaStatus.textContent = message || '';
+}
+
+function setCaptchaToken(token) {
+  captchaToken = token || '';
+  captchaContinue.disabled = !captchaToken;
+}
+
+function openCaptchaModal(url) {
+  pendingBooksyUrl = url || BOOKSY_URL;
+  captchaModal.classList.add('active');
+  captchaModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  setCaptchaToken('');
+
+  if (TURNSTILE_SITE_KEY === 'YOUR_CLOUDFLARE_TURNSTILE_SITE_KEY') {
+    setCaptchaStatus('Dodaj klucz Cloudflare Turnstile, aby wĹ‚Ä…czyÄ‡ weryfikacjÄ™.');
+    return;
+  }
+
+  if (!window.turnstile) {
+    setCaptchaStatus('Captcha jeszcze siÄ™ ładuje. Spróbuj ponownie za chwilÄ™.');
+    return;
+  }
+
+  setCaptchaStatus('Zaznacz pole weryfikacji, aby przejĹ›Ä‡ dalej.');
+
+  if (turnstileWidgetId !== null) {
+    window.turnstile.reset(turnstileWidgetId);
+    return;
+  }
+
+  turnstileWidgetId = window.turnstile.render('#captcha-widget', {
+    sitekey: TURNSTILE_SITE_KEY,
+    theme: 'dark',
+    callback(token) {
+      setCaptchaToken(token);
+      setCaptchaStatus('Gotowe. Możesz przejĹ›Ä‡ do Booksy.');
+    },
+    'expired-callback'() {
+      setCaptchaToken('');
+      setCaptchaStatus('Weryfikacja wygasĹ‚a. Spróbuj ponownie.');
+    },
+    'error-callback'() {
+      setCaptchaToken('');
+      setCaptchaStatus('Nie udaĹ‚o siÄ™ załadowaÄ‡ captchy. Spróbuj odĹ›wieżyÄ‡ stronÄ™.');
+    }
+  });
+}
+
+function closeCaptchaModal() {
+  captchaModal.classList.remove('active');
+  captchaModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+  setCaptchaToken('');
+}
+
+$$('a[href="' + BOOKSY_URL + '"]').forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    openCaptchaModal(link.href);
+  });
+});
+
+captchaClose.addEventListener('click', closeCaptchaModal);
+captchaModal.addEventListener('click', (event) => {
+  if (event.target === captchaModal) closeCaptchaModal();
+});
+
+captchaContinue.addEventListener('click', () => {
+  if (!captchaToken) return;
+  window.open(pendingBooksyUrl, '_blank', 'noopener');
+  closeCaptchaModal();
+});
+
+})();
+</script>
+</body>
 </html>
