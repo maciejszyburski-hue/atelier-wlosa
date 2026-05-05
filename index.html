@@ -151,24 +151,6 @@
     }
     ::selection { background: var(--gold); color: var(--dark); }
 
-    /* ── GRAIN ── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      z-index: 9998; pointer-events: none; opacity: 0.038;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 200px;
-    }
-
-    /* ── PATCHWORK ── */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      z-index: -1; pointer-events: none; opacity: 0.022;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='0.7'%3E%3Cpath d='M25 15 L35 40 L25 65 M35 40 L45 15 M35 40 L45 65' stroke-linecap='round'/%3E%3Ccircle cx='72' cy='30' r='7'/%3E%3Ccircle cx='72' cy='30' r='3.5'/%3E%3Cpath d='M8 75 Q25 65 42 75 Q59 85 76 75' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E");
-      background-size: 100px 100px;
-    }
-
     /* ── SCROLL PROGRESS ── */
     #scroll-progress {
       position: fixed; top: 0; left: 0;
@@ -196,18 +178,6 @@
     body.c-hover .cursor-dot { width: 9px; height: 9px; }
     body.c-hover .cursor-ring { width: 44px; height: 44px; }
     body.c-click .cursor-dot { width: 3px; height: 3px; }
-
-    /* ── MUTE ── */
-    #mute-btn {
-      position: fixed; top: 22px; right: 22px;
-      z-index: 9997; background: rgba(13,11,7,.75);
-      border: 1px solid var(--gold-dim); color: var(--gold);
-      width: 34px; height: 34px; border-radius: 50%;
-      cursor: none; display: flex; align-items: center; justify-content: center;
-      font-size: 13px; backdrop-filter: blur(8px);
-      opacity: 0; transition: opacity .4s, border-color .3s;
-    }
-    #mute-btn.show { opacity: 1; }
 
     /* ── INTRO ── */
     #intro {
@@ -771,12 +741,6 @@
   <div class="cursor-dot"></div>
   <div class="cursor-ring"></div>
 
-  <button id="mute-btn" aria-label="Wycisz">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" id="mute-icon">
-      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
-    </svg>
-  </button>
-
   <!-- INTRO -->
   <div id="intro">
     <div class="intro-bar intro-bar-t"></div>
@@ -1098,12 +1062,10 @@
     const tag    = document.getElementById('intro-tag');
     const cta    = document.getElementById('intro-cta');
     const navbar = document.getElementById('navbar');
-    const mute   = document.getElementById('mute-btn');
     const SK     = 'aw_seen';
 
     function reveal(){
       navbar.classList.add('show');
-      mute.classList.add('show');
     }
 
     function dismiss(){
@@ -1245,63 +1207,6 @@
     }));
   })();
 
-  /* ── WEB AUDIO ── */
-  (function(){
-    let ctx=null, muted=localStorage.getItem('aw_m')==='1';
-    const btn=document.getElementById('mute-btn');
-    const icon=document.getElementById('mute-icon');
-
-    const ON_PATH  = 'M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z';
-    const OFF_PATH = 'M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z';
-
-    function C(){ if(!ctx) ctx=new(window.AudioContext||window.webkitAudioContext)(); if(ctx.state==='suspended') ctx.resume(); return ctx; }
-
-    function snip(){
-      if(muted) return;
-      try{
-        const c=C(), o=c.createOscillator(), g=c.createGain();
-        o.connect(g); g.connect(c.destination);
-        o.frequency.setValueAtTime(4200,c.currentTime);
-        o.frequency.exponentialRampToValueAtTime(600,c.currentTime+.06);
-        g.gain.setValueAtTime(.07,c.currentTime);
-        g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.07);
-        o.start(); o.stop(c.currentTime+.07);
-      }catch(e){}
-    }
-
-    function whoosh(){
-      if(muted) return;
-      try{
-        const c=C(), buf=c.createBuffer(1,c.sampleRate*.35,c.sampleRate);
-        const d=buf.getChannelData(0);
-        for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
-        const src=c.createBufferSource(); src.buffer=buf;
-        const f=c.createBiquadFilter(); f.type='lowpass';
-        f.frequency.setValueAtTime(120,c.currentTime);
-        f.frequency.exponentialRampToValueAtTime(3200,c.currentTime+.35);
-        const g=c.createGain();
-        g.gain.setValueAtTime(.05,c.currentTime);
-        g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.35);
-        src.connect(f); f.connect(g); g.connect(c.destination); src.start();
-      }catch(e){}
-    }
-
-    function syncIcon(){
-      icon.querySelector('path').setAttribute('d', muted ? OFF_PATH : ON_PATH);
-    }
-
-    btn.addEventListener('click',()=>{
-      muted=!muted; localStorage.setItem('aw_m',muted?'1':'0'); syncIcon();
-    });
-    syncIcon();
-
-    document.querySelectorAll('a,button').forEach(el=> el.addEventListener('click', snip));
-
-    const obs=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ whoosh(); obs.unobserve(e.target); } });
-    },{ threshold:.25 });
-    document.querySelectorAll('section').forEach((s,i)=>{ if(i>0) obs.observe(s); });
-  })();
   </script>
 </body>
 </html>
