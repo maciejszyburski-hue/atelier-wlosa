@@ -1,0 +1,25 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/galeria",
+      "destination": "/galeria.html"
+    },
+    {
+      "source": "/galeria/",
+      "destination": "/galeria.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "**/*.@(html|xml|txt)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
